@@ -1,0 +1,7 @@
+@import url("variables.css");
+
+
+body{
+    background: var(--50) ;
+    height: 100%;
+}
