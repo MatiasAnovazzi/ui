@@ -4,8 +4,8 @@ function Nav(){
         <div id='nav'>
             <h1>CliProApp</h1>
             <div id='links'>
-                <span>Login</span>
-                <span>Register</span>
+                <span>Acceder</span>
+                <span>Registrarse</span>
             </div>
         </div>
     )
