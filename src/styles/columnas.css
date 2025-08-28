@@ -1,0 +1,85 @@
+#columnas{
+    margin-top: 1%;
+    width: 100%;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+h3{
+  width: 100%;
+  text-align: center;
+}
+#contenedor{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+#left, #right{
+    width: 50%;
+    text-align: center;
+    height: 20%;
+    border: 4px solid var(--500);
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 2%;
+    transition: all .3s ease;
+}
+
+#ul-left {
+  list-style: none;
+  margin-left: 2%;
+  padding-left: 1.5em;
+  text-align: left;
+  display: none;
+  transition: all .5s ease;
+}
+
+#ul-left li::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: -1.5em;
+  margin-right: 1%;
+  background-image: url('check-green.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+#ul-right {
+  list-style: none;
+  margin-left: 2%;
+  padding-left: 1.5em;
+  text-align: left;
+  display: none;
+  transition: all .5s ease;
+}
+
+#ul-right li::before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: -1.5em;
+  margin-right: 1%;
+  background-image: url('check-green.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+#left:hover #ul-left{
+  display: block
+} 
+#right:hover #ul-right{
+  display: block
+}
+#left:hover{
+  height: 100%;
+}
+#right:hover{
+  height: 100%;
+}
