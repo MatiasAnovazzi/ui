@@ -2,6 +2,7 @@ import Nav from './Nav.jsx'
 import Inicio from './inicio.jsx'
 import Section from "./Section.jsx"
 import Columnas from "./columnas.jsx"
+import SectionCards from './section-cards.jsx'
 function Ui() {
 
   return (
@@ -10,7 +11,7 @@ function Ui() {
       <Inicio />
       <Section />
       <Columnas/>
-
+      <SectionCards />
     </>
   )
 }

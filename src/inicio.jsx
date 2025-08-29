@@ -7,7 +7,7 @@ function Inicio(){
                     <span><h1>Bienvenidos a <br /> CliProApp</h1>
                     <h2>Una <strong>solucion </strong> a tu medida para <br /> la <strong>gestion de turnos</strong> </h2>
                     </span>
-                    <img src={img} />
+                    <img className="img-inicio" src={img} />
                 </div>
                 
             </div>
