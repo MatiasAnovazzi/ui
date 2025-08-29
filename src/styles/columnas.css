@@ -11,6 +11,11 @@ h3{
   width: 100%;
   text-align: center;
 }
+.encab{
+  width: 100%;
+  text-align: center;
+  color: var(--500);
+}
 #contenedor{
   display: flex;
   width: 100%;
@@ -19,30 +24,38 @@ h3{
 #left, #right{
     width: 50%;
     text-align: center;
-    height: 20%;
-    border: 4px solid var(--500);
+    height: 100%;
     margin-left: 5px;
     margin-right: 5px;
     border-radius: 2%;
-    transition: all .3s ease;
+    transition: all .5s ease;
 }
-
+li{
+  margin: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 #ul-left {
   list-style: none;
   margin-left: 2%;
   padding-left: 1.5em;
   text-align: left;
-  display: none;
-  transition: all .5s ease;
+
+  max-height: 0%;
+  overflow: hidden;
+
+
+  transition: all .3s ease;
 }
 
 #ul-left li::before {
   content: "";
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-left: -1.5em;
-  margin-right: 1%;
+  width: 15px;
+  height: 15px;
+  margin-left: 0%;
+  margin-right: 2%;
   background-image: url('check-green.svg');
   background-size: contain;
   background-repeat: no-repeat;
@@ -54,32 +67,56 @@ h3{
   margin-left: 2%;
   padding-left: 1.5em;
   text-align: left;
-  display: none;
   transition: all .5s ease;
+
+  max-height: 0%;
+  overflow: hidden;
+
+
+
 }
 
 #ul-right li::before {
   content: "";
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  margin-left: -1.5em;
-  margin-right: 1%;
+  width: 15px;
+  height: 15px;
+  margin-left: 0%;
+  margin-right: 2%;
   background-image: url('check-green.svg');
   background-size: contain;
   background-repeat: no-repeat;
 }
+#left:hover{
+  transform: scale(1.01);
+  background-color: var(--500);
+  transform: translateY(-4px);
+  box-shadow: 0px 0px 10px var(--300);
+  width: 70%;
+  color: var(--50);
+}
 
+#left:hover .encab {
+    color: var(--50)
+}
 
 #left:hover #ul-left{
-  display: block
-} 
-#right:hover #ul-right{
-  display: block
+  max-height: 100%;
 }
-#left:hover{
-  height: 100%;
-}
+
 #right:hover{
-  height: 100%;
+  transform: scale(1.01);
+  background-color: var(--500);
+  transform: translateY(-4px);
+  box-shadow: 0px 0px 10px var(--300);
+  width: 70%;
+  color: var(--50)
+
+}
+#right:hover .encab {
+    color: var(--50)
+}
+
+#right:hover #ul-right{
+  max-height: 100%;
 }

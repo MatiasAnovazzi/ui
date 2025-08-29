@@ -6,7 +6,7 @@ function Columnas(){
             <h3>¿Como se usa?</h3>
             <div id="contenedor">
                 <div id="left">
-                <h3>Clientes</h3>
+                <h2 className="encab" >Clientes</h2>
                 <ul id="ul-left">
                     <li>Te registras como cliente</li>
                     <li>Buscas el profesional de tu eleccion</li>
@@ -15,7 +15,7 @@ function Columnas(){
                 </ul>
             </div>
             <div id="right">
-                <h3>Profesionales</h3>
+                <h2 className="encab" >Profesionales</h2>
                 <ul id="ul-right">
                     <li>Te registras como profesional</li>
                     <li>Cargas tu actividad y disponibilidad horaria</li>
