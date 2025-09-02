@@ -1,22 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './styles/index.css'
-import Ui from './Ui.jsx'
-import favicon from './img/rayo.png';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
+import App from "./App.jsx";
 
-const setFavicon = (url) => {
-  const link = document.createElement('link');
-  link.rel = 'icon';
-  link.href = url;
-  document.head.appendChild(link);
-};
-
-setFavicon(favicon);
-
-
-
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <Ui />
-  </StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);

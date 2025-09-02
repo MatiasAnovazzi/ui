@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './styles/Nav.css'
 function Nav(){
     return (
@@ -5,7 +6,7 @@ function Nav(){
             <h1>CliProApp</h1>
             <div id='links'>
                 <span><a href="">Acceder</a></span>
-                <span><a href="register.html">Registrarse</a></span>
+                <span><Link to="/register">Registrarse</Link></span>
             </div>
         </div>
     )
