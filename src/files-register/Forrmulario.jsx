@@ -1,74 +1,113 @@
-import { useEffect, useState } from "react"
+import { useState, useEffect } from "react"
 import "./styles/formulario.css"
-function Formulario () {
+function Formulario() {
     const URLP = "https://api-cliproapp.up.railway.app/docs"
     const URL = "https://api-cliproapp.up.railway.app/"
-    const [state, setState] = useState("Probando conexion a api...")
 
-    useEffect(()=>{
-        fetch(URLP).then(response => {
-            if(response.ok){
-                setState("Conexion exitosa")
-            }
-            else{
-                setState("Error de conexion")
-            }
-        })
-    })
-    
-    function enviar(){
-        const nombre = document.getElementById("nombre").value
-        const dni = document.getElementById("dni").value
-        const edad = document.getElementById("edad").value
-        const telefono = document.getElementById("telefono").value
-        const seleccion = document.getElementById("seleccion").value
-        console.log(nombre, dni, edad, telefono, seleccion)
+    const [state, setState] = useState("Probando conexión a API...")
+    const [className, setClassName] = useState("disappear")
 
-        if(seleccion == "cliente"){
+    // Estados de los inputs
+    const [nombre, setNombre] = useState("")
+    const [dni, setDni] = useState("")
+    const [edad, setEdad] = useState("")
+    const [telefono, setTelefono] = useState("")
+    const [seleccion, setSeleccion] = useState("cliente")
+    const [especialidad, setEspecialidad] = useState("")
 
-            const nuevo_cliente = {
-                "nombre_completo" : nombre,
-                "dni": dni,
-                "edad": Number(edad),
-                "telefono": telefono
-            }
-            
-            fetch(URL + "usuarios/clientes",{
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(nuevo_cliente)
-            }).then(response => response.json()).then(data => {
-                console.log(data)
+    // Probar conexión a la API al montar
+    useEffect(() => {
+        fetch(URLP)
+            .then(response => {
+                if (response.ok) {
+                    setState("Conexión exitosa")
+                } else {
+                    setState("Error de conexión")
+                }
             })
+            .catch(() => setState("Error de conexión"))
+    }, [])
+
+    // Manejar cambio en el select
+    function handleChange(e) {
+        const value = e.target.value
+        setSeleccion(value)
+        if (value === "profesional") {
+            setClassName("")
+        } else {
+            setClassName("disappear")
         }
-
-
     }
 
+    // Enviar datos a la API
+    function enviar() {
+        if (seleccion === "cliente") {
+            const nuevo_cliente = {
+                nombre_completo: nombre,
+                dni,
+                edad: Number(edad),
+                telefono
+            }
 
+            fetch(URL + "usuarios/clientes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevo_cliente)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+        } else {
+            const nuevo_profesional = {
+                nombre_completo: nombre,
+                dni,
+                edad: Numbzer(edad),
+                telefono,
+                especialidad
+            }
 
-    return(
+            fetch(URL + "usuarios/profesionales", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(nuevo_profesional)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
+        }
+    }
+
+    return (
         <>
             <div id="prueba">{state}</div>
             <div className="container-form">
                 <div id="form">
                     <p>Nombre:</p>
-                    <input type="text" id="nombre" placeholder="Ingresa un nombre" />
+                    <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Ingresa un nombre"/>
+
                     <p>DNI:</p>
-                    <input type="text" id="dni"/>
+                    <input type="text" value={dni} onChange={e => setDni(e.target.value)}/>
+
                     <p>Edad:</p>
-                    <input type="number" id="edad" />
-                    <p>Telefono:</p>
-                    <input type="text" id="telefono" />
+                    <input type="number" value={edad} onChange={e => setEdad(e.target.value)}/>
+
+                    <p>Teléfono:</p>
+                    <input type="text" value={telefono} onChange={e => setTelefono(e.target.value)}/>
+
                     <p>Cliente o usuario</p>
-                    <select name="" id="seleccion">
+                    <select id="seleccion" value={seleccion} onChange={handleChange}>
                         <option value="cliente">Cliente</option>
                         <option value="profesional">Profesional</option>
                     </select>
-                    <button onClick={enviar} > Registrarse </button>
+
+                    <div id="espec" className={className}>
+                        <p>Especialidad</p>
+                        <input type="text" value={especialidad} onChange={e => setEspecialidad(e.target.value)}/>
+                    </div>
+
+                    <button id="enviar" onClick={enviar}>Registrarse</button>
                 </div>
             </div>
         </>
     )
 }
+
 export default Formulario

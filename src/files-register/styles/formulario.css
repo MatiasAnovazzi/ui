@@ -32,3 +32,26 @@ button{
     margin: 2% auto 0 auto;
     width: 40%;
 }
+#espec{
+    transition: all .5s ease;
+}
+.disappear{
+    max-width: 0;
+    max-height: 0;
+}
+.disappear p{
+    display: none;
+}
+.disappear input{
+    display: none;
+}
+.appear{
+    max-width: 0;
+    max-height: 0;
+}
+.appear p{
+    display: block;
+}
+.appear input{
+    display: block;
+}
