@@ -1,9 +1,10 @@
 import "./styles/login.css"
 import { useState } from "react"
 import { URL_API } from "./access"
+import { useNavigate } from "react-router-dom"
 
 function Login () {
-    const [data,  setUserData] = useState()
+    const navigate = useNavigate()
     const [value, setValue] = useState("")   // DNI
     const [type, setType] = useState("clientes") // default "clientes"
 
@@ -22,9 +23,12 @@ function Login () {
                 alert("ERROR WACHIN")
                 return
             }
-            const data = await response.json()
-            console.log(data)
-            setUserData(data)
+            
+            navigate("/dashboard", {state: {
+                id: value,
+                type: type
+            }} )
+
         } catch (error) {
             console.error("Error en la petición:", error)
         }
