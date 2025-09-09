@@ -1,8 +1,15 @@
 import "./styles/encabezado.css"
-
+import { MediaQuery } from 'react-responsive'
 function Encabezado (){
     return (
-        <h1 id="encab" >Registrate y obten los mejores beneficios</h1>
+       <div>
+    <MediaQuery query="(min-width: 1224px)">
+      <p>Esto se muestra en escritorio o laptop</p>
+    </MediaQuery>
+    <MediaQuery query="(max-width: 767px)">
+      <p>Esto se muestra en móvil</p>
+    </MediaQuery>
+  </div>
 
     )
 }
