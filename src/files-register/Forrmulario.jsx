@@ -60,7 +60,7 @@ function Formulario() {
             const nuevo_profesional = {
                 nombre_completo: nombre,
                 dni,
-                edad: Numbzer(edad),
+                edad: Number(edad),
                 telefono,
                 especialidad
             }
