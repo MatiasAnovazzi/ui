@@ -44,6 +44,7 @@
     color: var(--500);
 }
 .desc-card{
+    text-align: center;
     margin: 0%;
     padding-top: 3%;
     font-size: 14px;
