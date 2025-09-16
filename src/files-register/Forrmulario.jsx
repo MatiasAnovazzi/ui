@@ -6,6 +6,7 @@ function Formulario() {
 
     const [state, setState] = useState("Probando conexión a API...")
     const [className, setClassName] = useState("disappear")
+    const [register, setRegister] = useState("Registrando...")
 
     // Estados de los inputs
     const [nombre, setNombre] = useState("")
@@ -21,6 +22,7 @@ function Formulario() {
             .then(response => {
                 if (response.ok) {
                     setState("Conexión exitosa")
+                    
                 } else {
                     setState("Error de conexión")
                 }
@@ -41,6 +43,7 @@ function Formulario() {
 
     // Enviar datos a la API
     function enviar() {
+        setRegister("Registrando...")
         if (seleccion === "cliente") {
             const nuevo_cliente = {
                 nombre_completo: nombre,
@@ -55,7 +58,12 @@ function Formulario() {
                 body: JSON.stringify(nuevo_cliente)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    if (data){
+                        setRegister("Registro extremadamente exitoso")
+                    }
+                    console.log(data)
+                })
         } else {
             const nuevo_profesional = {
                 nombre_completo: nombre,
@@ -71,7 +79,12 @@ function Formulario() {
                 body: JSON.stringify(nuevo_profesional)
             })
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    if (data){
+                        setRegister("Registro extremadamente exitoso")
+                    }
+                    console.log(data)
+                })
         }
     }
 
@@ -102,9 +115,9 @@ function Formulario() {
                         <p>Especialidad</p>
                         <input type="text" value={especialidad} onChange={e => setEspecialidad(e.target.value)}/>
                     </div>
-
                     <button id="enviar" onClick={enviar}>Registrarse</button>
                 </div>
+                <div>{register}</div>
             </div>
         </>
     )

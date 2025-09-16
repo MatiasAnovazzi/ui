@@ -3,7 +3,7 @@ import { useState } from "react"
 import { URL_API } from "./access"
 import { useNavigate } from "react-router-dom"
 
-function Login () {
+function Login() {
     const navigate = useNavigate()
     const [value, setValue] = useState("")   // DNI
     const [type, setType] = useState("clientes") // default "clientes"
@@ -18,34 +18,51 @@ function Login () {
         }
 
         try {
-            const response = await fetch(`${URL_API}/usuarios/${type}/${value}`)
+            const response = await fetch(`${URL_API}/usuarios/${type}/`)
             if (!response.ok) {
                 alert("ERROR WACHIN")
                 return
             }
-            
-            navigate("/dashboard", {state: {
-                id: value,
-                type: type
-            }} )
+            let arr = await response.json()
+            console.log(arr)
+            let id = 0
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i].dni == value) {
+                    id = arr[i].id
+                    break
+                }
+            }
+            if (id != 0) {
+                navigate("/dashboard", {
+                    state: {
+                        id: id,
+                        type: type
+                    }
+                })
+            }
+            else {
+                alert("NO ENCONTRADO, WACHIN")
+            }
+
+
 
         } catch (error) {
-            console.error("Error en la petición:", error)
+            console.error("Errorrrrrrr:", error)
         }
     }
 
     return (
         <div id="login">
             <p id="login-encab">Ingresa tu documento</p>
-            
-            <input 
-                type="text" 
-                value={value} 
-                onChange={(e) => setValue(e.target.value)} 
+
+            <input
+                type="text"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
             />
 
-            <select 
-                value={type} 
+            <select
+                value={type}
                 onChange={(e) => setType(e.target.value)}
             >
                 <option value="clientes">Cliente</option>
