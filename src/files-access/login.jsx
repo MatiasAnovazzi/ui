@@ -18,11 +18,13 @@ function Login() {
         }
 
         try {
-            const response = await fetch(`${URL_API}/usuarios/${type}/`)
+            const response = await fetch(`${URL_API}/usuarios/${type}`)
             if (!response.ok) {
                 alert("ERROR WACHIN")
                 return
             }
+            let url = await response.url
+            console.log(url)
             let arr = await response.json()
             console.log(arr)
             let id = 0
