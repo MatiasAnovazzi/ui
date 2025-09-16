@@ -1,24 +1,16 @@
 import { useLocation } from "react-router-dom"
-import { URL_API } from "../files-access/access"
-import { useState } from "react"
+import Cliente from "./dashboard-clientes"
+import Profesional from "./dashboard-profesional"
 function Dashboard(){
-const [nombre, setNombre] = useState("")
 const location = useLocation()
 const state = location.state
-console.log(state)
-
-
-    fetch(`${URL_API}/usuarios/${state.type}/${state.id}`)
-    .then(response => response.json())
-    .then(data => {
-        setNombre(data.nombre_completo)
-    })
-    
 
     return(
         <>
-        <p>Bienvenido, {nombre}</p>
+        {state.type == "clientes" && <Cliente state={state}/>}
+        {state.type == "profesionales" && <Profesional state={state}/>}
         </>
+        
     )
 }
 export default Dashboard

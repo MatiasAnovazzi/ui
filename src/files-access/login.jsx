@@ -26,7 +26,6 @@ function Login() {
             let url = await response.url
             console.log(url)
             let arr = await response.json()
-            console.log(arr)
             let id = 0
             for (let i = 0; i < arr.length; i++) {
                 if (arr[i].dni == value) {
