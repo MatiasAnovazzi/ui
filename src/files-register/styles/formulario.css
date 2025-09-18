@@ -45,7 +45,7 @@ select{
 .p-div{
     margin-top: auto;
 }
-button{
+button {
     margin: 3% auto 5% auto;
     width: 80%;
     border-radius: 12px;
@@ -54,12 +54,52 @@ button{
     color: var(--700);
     font-weight: bold;
     padding: 1%;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
+    position: relative;          /* necesario para el pseudo-elemento */
+    overflow: hidden;            /* para que no se salga la animación */
+    
+    cursor: pointer;
+    display: flex;               /* para centrar el texto */
+    align-items: center;
+    justify-content: center;
 }
-button:hover{
-    background-color: var(--700);
-    color: var(--50);
+
+/* Animación del fondo al hacer hover */
+button:hover {
+    background: linear-gradient(to right, var(--50), var(--50), var(--800), var(--800), var(--50), var(--50));
+    background-size: 500% 100%;
+    animation: animarFondo 3s linear infinite alternate;
 }
+button p{
+    margin: 0;
+}
+/* P dentro del botón: animación de color */
+button:hover p {
+    margin: 0;
+    color: var(--700);
+    animation: colorTexto 1.5s ease-in-out infinite alternate;
+}
+
+/* Animación del fondo */
+@keyframes animarFondo {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/* Animación de color para el texto */
+@keyframes colorTexto {
+    0% {
+        color: var(--700);
+    }
+    100% {
+        color: var(--50);
+    }
+}
+
 #espec{
     transition: all .5s ease;
     text-align: center;

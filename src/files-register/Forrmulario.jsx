@@ -116,7 +116,7 @@ function Formulario() {
                         <p className="p-div">Especialidad</p>
                         <input type="text" value={especialidad} onChange={e => setEspecialidad(e.target.value)} placeholder="Ingrese su especialidad" />
                     </div>
-                    <button id="enviar" onClick={enviar}>{register}</button>
+                    <button id="enviar" onClick={enviar}><p>{register}</p></button>
 
                 </div>
                 <p className="p-login" >Ya tienes una cuenta? <Link to="/access" >Iniciar sesion</Link> </p>
