@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react"
 import "./styles/formulario.css"
+import { Link } from "react-router-dom"
+import Access from "../files-access/access"
 function Formulario() {
     const URLP = "https://api-cliproapp.up.railway.app/docs"
     const URL = "https://api-cliproapp.up.railway.app/"
 
     const [state, setState] = useState("Probando conexión a API...")
     const [className, setClassName] = useState("disappear")
-    const [register, setRegister] = useState("Registrando...")
+    const [register, setRegister] = useState("Registrarse")
 
     // Estados de los inputs
     const [nombre, setNombre] = useState("")
@@ -90,20 +92,19 @@ function Formulario() {
 
     return (
         <>
-            <div id="prueba">{state}</div>
             <div className="container-form">
                 <div id="form">
                     <p>Nombre:</p>
                     <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Ingresa un nombre"/>
 
                     <p>DNI:</p>
-                    <input type="text" value={dni} onChange={e => setDni(e.target.value)}/>
+                    <input type="text" value={dni} onChange={e => setDni(e.target.value)} placeholder="Ingresa un DNI" />
 
                     <p>Edad:</p>
-                    <input type="number" value={edad} onChange={e => setEdad(e.target.value)}/>
+                    <input type="number" value={edad} onChange={e => setEdad(e.target.value)} placeholder="Ingresa tu edad" />
 
                     <p>Teléfono:</p>
-                    <input type="text" value={telefono} onChange={e => setTelefono(e.target.value)}/>
+                    <input type="text" value={telefono} onChange={e => setTelefono(e.target.value)} placeholder="Ingresa tu telefono" />
 
                     <p>Cliente o usuario</p>
                     <select id="seleccion" value={seleccion} onChange={handleChange}>
@@ -112,12 +113,13 @@ function Formulario() {
                     </select>
 
                     <div id="espec" className={className}>
-                        <p>Especialidad</p>
-                        <input type="text" value={especialidad} onChange={e => setEspecialidad(e.target.value)}/>
+                        <p className="p-div">Especialidad</p>
+                        <input type="text" value={especialidad} onChange={e => setEspecialidad(e.target.value)} placeholder="Ingrese su especialidad" />
                     </div>
-                    <button id="enviar" onClick={enviar}>Registrarse</button>
+                    <button id="enviar" onClick={enviar}>{register}</button>
+
                 </div>
-                <div>{register}</div>
+                <p className="p-login" >Ya tienes una cuenta? <Link to="/access" >Iniciar sesion</Link> </p>
             </div>
         </>
     )
