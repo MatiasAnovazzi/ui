@@ -28,7 +28,7 @@ function Profesional({state}){
             .then(data => {
                 setTurnos(data)
             })
-        fetch(`${URL_API}/usuarios/clientes/`)
+        fetch(`${URL_API}/usuarios/clientes`)
             .then(response => response.json())
             .then(data => {
                 setClientes(data)
