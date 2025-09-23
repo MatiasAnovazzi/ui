@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
-import Cliente from "./dashboard-clientes"
-import Profesional from "./dashboard-profesional"
+import Cliente from "./logica-clientes/dashboard-clientes"
+import Profesional from "./logica-profesionales/dashboard-profesional"
 function Dashboard(){
 const location = useLocation()
 const state = location.state

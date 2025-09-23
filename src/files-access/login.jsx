@@ -1,18 +1,27 @@
 import "./styles/login.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { URL_API } from "./access"
 import { useNavigate } from "react-router-dom"
 
 function Login() {
+
+    useEffect(()=>{
+        document.body.style.backgroundColor = "#edf7ff"
+    },[])
+
+
+    const [register, setRegister] = useState("Acceder") 
     const navigate = useNavigate()
     const [value, setValue] = useState("")   // DNI
     const [type, setType] = useState("clientes") // default "clientes"
 
     const Submit = async (e) => {
+        setRegister("Accediendo...")
         e.preventDefault()
 
         // Validación del DNI
         if (!value || isNaN(Number(value)) || Number(value) > 99999999) {
+            setRegister("Acceder")
             alert("El dato ingresado es reverendamente incorrecto, tipea bien imbecil")
             return
         }
@@ -20,6 +29,7 @@ function Login() {
         try {
             const response = await fetch(`${URL_API}/usuarios/${type}`)
             if (!response.ok) {
+                setRegister("Acceder")
                 alert("ERROR WACHIN")
                 return
             }
@@ -42,6 +52,7 @@ function Login() {
                 })
             }
             else {
+                setRegister("Acceder")
                 alert("NO ENCONTRADO, WACHIN")
             }
 
@@ -49,6 +60,7 @@ function Login() {
 
         } catch (error) {
             console.error("Errorrrrrrr:", error)
+            setRegister("Acceder")
         }
     }
 
@@ -57,6 +69,8 @@ function Login() {
             <p id="login-encab">Ingresa tu documento</p>
 
             <input
+                placeholder="Escriba aqui.."
+                id="input-access"
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
@@ -70,7 +84,7 @@ function Login() {
                 <option value="profesionales">Profesional</option>
             </select>
 
-            <button id="logged" onClick={Submit}>Acceder</button>
+            <button id="logged" onClick={Submit}><p>{register}</p></button>
         </div>
     )
 }

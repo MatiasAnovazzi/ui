@@ -36,8 +36,13 @@ input{
     border: none;
     background-color: transparent;
     border-bottom: 1px solid grey;
+    transition: all .5s ease;
 }
-
+input:focus{
+    outline: none;
+    border:none;
+    border-bottom: 1px solid var(--700);
+}
 select{
     width: 85%;
     margin: 0% auto 2% auto;

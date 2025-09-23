@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import './styles/Nav.css'
+import { useEffect } from 'react'
 function Nav(){
+    useEffect(()=>{
+        document.body.style.backgroundColor = "#edf7ff"
+    })
     return (
         <>
         <div id='nav'>

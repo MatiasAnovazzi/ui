@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import Card from "./modules/card-profesionales"
-import { URL_API } from "../files-access/access"
+import { URL_API } from "../../files-access/access"
 function Cliente ({state}){
 
 const [persona, setPersona] = useState({})

@@ -1,8 +1,11 @@
 @import url("variables.css");
 
-
+#root{
+    width: 100%;
+    height: 100%;
+}
 body{
-    background: var(--50) ;
+    background-color: var(--50);
     height: 100%;
     width: 100%;
     margin: 0;
