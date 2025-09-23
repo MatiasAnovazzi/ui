@@ -3,7 +3,7 @@ import { URL_API } from "../../files-access/access"
 import SupContainer from "./sup-container"
 import TurnoProximo from "./container-info"
 import "./styles/dashboard-profesional.css"
-
+import Turnos from "./turnos"
 function Profesional({state}){
     /*
     variable profesional guarda datos del profesional logueado ej: nombre, especialidad
@@ -89,10 +89,13 @@ function Profesional({state}){
 
     return (
         <div id="render-pro" >
-        <SupContainer nombre={profesional.nombre_completo} total_turnos={turnos_hoy.length}/>
-        <TurnoProximo 
-        hora={`${hora_proximo_turno.getHours()}:${hora_proximo_turno.getMinutes() <= 9 ? `0${hora_proximo_turno.getMinutes()}`:`${hora_proximo_turno.getMinutes()}`}`} 
-        nombre_cliente={nombre_cliente} />
+          <SupContainer nombre={profesional.nombre_completo} total_turnos={turnos_hoy.length}/>
+          <TurnoProximo 
+            hora={`${hora_proximo_turno.getHours()}:${hora_proximo_turno.getMinutes() <= 9 ? `0${hora_proximo_turno.getMinutes()}`:`${hora_proximo_turno.getMinutes()}`}`} 
+            nombre_cliente={nombre_cliente}
+            />
+          <Turnos turnos={turnos_hoy} clientes={clientes} />
+
         </div>
     )
 }

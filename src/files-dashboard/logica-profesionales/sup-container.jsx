@@ -1,3 +1,5 @@
+import "./styles/sup-container.css"
+
 function SupContainer({ nombre, total_turnos }) {
   let contador = ""
 
@@ -10,10 +12,10 @@ function SupContainer({ nombre, total_turnos }) {
   }
 
   return (
-    <>
+    <div id="container-encab" >
       <h1>Hola {nombre}! Esta es tu agenda... </h1> 
       <h4>{contador}</h4>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,5 @@
+#container-turnos{
+    display: flex;
+    height: 35%;
+    border: 1px solid black;
+}
