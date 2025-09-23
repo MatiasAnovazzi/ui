@@ -17,6 +17,7 @@ function Profesional({state}){
    const [clientes, setClientes] = useState([])
    const [nombre_cliente, setNombreCliente] = useState("")
    const [hora_proximo_turno, setHoraProximoTurno] = useState(new Date());
+   const [turnos_hoy, setTurnosHoy] = useState([])
    useEffect(() => {
     // obtener datos del profesional
         fetch(`${URL_API}/usuarios/${state.type}/${state.id}`)
@@ -39,39 +40,59 @@ function Profesional({state}){
     }, [state.id])
 
     useEffect(() => {
-        if (turnos.length === 0) return;
-        let fecha_actual = new Date();
-        let turnos_hoy = [];
-        // se filtran los turnos del profesional para conservar solo los del dia actual
-        for (let i = 0; i < turnos.length; i++) {
-            let date = new Date(turnos[i].hora_inicio);
-            if ( date.getDate() === fecha_actual.getDate() && date.getMonth() === fecha_actual.getMonth() && date.getFullYear() === fecha_actual.getFullYear()) {
-                turnos_hoy.push(turnos[i]);
-            }
-        }
-        // si hay algun turno para el dia de hoy, se busca y guarda el mas proximo a la hora actual
-        if (turnos_hoy.length > 0) {
-            let min = turnos_hoy[0];
-            turnos_hoy.forEach(turno => {
-                let date1 = new Date(turno.hora_inicio);
-                let date2 = new Date(min.hora_inicio);
-                if (date1 < date2) {
-                    min = turno;
-                }
-            });
-            setHoraProximoTurno(new Date(min.hora_inicio));
-            clientes.find(cliente => {
-                if (cliente.id === min.id_cliente) {
-                    setNombreCliente(cliente.nombre_completo);
-                }
-            });
-        }
-    }, [turnos]);
+  if (turnos.length === 0) return;
+
+  let fecha_actual = new Date();
+
+  // filtrar todos los turnos de hoy
+  let hoy = turnos.filter(turno => {
+    let date = new Date(turno.hora_inicio);
+    return (
+      date.getDate() === fecha_actual.getDate() &&
+      date.getMonth() === fecha_actual.getMonth() &&
+      date.getFullYear() === fecha_actual.getFullYear()
+    );
+  }).sort((a,b) => new Date(a.hora_inicio) - new Date (b.hora_inicio));
+
+  setTurnosHoy(hoy);
+
+  // si hay turnos hoy, buscamos el más próximo
+  if (hoy.length > 0) {
+    let proximo_turno = hoy[0]
+    // Verificar si el turno ya pasó
+    const ahora = new Date();
+    let idx = 0;
+    while (
+      idx < hoy.length &&
+      new Date(hoy[idx].hora_inicio) <= ahora
+    ) {
+      idx++;
+    }
+    // Si hay un turno próximo, usarlo; si no, vaciar proximo_turno
+    if (idx < hoy.length) {
+      proximo_turno = hoy[idx];
+    } else {
+      proximo_turno = null;
+    }
+    if(proximo_turno){
+        setHoraProximoTurno(new Date(proximo_turno.hora_inicio));
+        let cliente = clientes.find(c => c.id === proximo_turno.id_cliente);
+        if (cliente) {
+        setNombreCliente(cliente.nombre_completo);
+    }
+    }
+
+    // buscar nombre del cliente
+    
+  }
+}, [turnos, clientes]);
 
     return (
         <div id="render-pro" >
-        <SupContainer nombre={profesional.nombre_completo} total_turnos={turnos.length}/>
-        <TurnoProximo hora={`${hora_proximo_turno.getHours()}:${hora_proximo_turno.getMinutes()}`} nombre_cliente={nombre_cliente} />
+        <SupContainer nombre={profesional.nombre_completo} total_turnos={turnos_hoy.length}/>
+        <TurnoProximo 
+        hora={`${hora_proximo_turno.getHours()}:${hora_proximo_turno.getMinutes() <= 9 ? `0${hora_proximo_turno.getMinutes()}`:`${hora_proximo_turno.getMinutes()}`}`} 
+        nombre_cliente={nombre_cliente} />
         </div>
     )
 }

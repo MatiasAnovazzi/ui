@@ -1,7 +1,8 @@
 function TurnoProximo({hora, nombre_cliente}){
     return(
         <>
-        Tu proximo turno es a las {hora} con {nombre_cliente}
+        {nombre_cliente ? `Tu proximo turno es a las ${hora} con ${nombre_cliente}`: `No tienes turnos proximos`}
+        
         </>
     )
 }
