@@ -18,16 +18,19 @@ function Profesional({state}){
    const [nombre_cliente, setNombreCliente] = useState("")
    const [hora_proximo_turno, setHoraProximoTurno] = useState(new Date());
    useEffect(() => {
+    // obtener datos del profesional
         fetch(`${URL_API}/usuarios/${state.type}/${state.id}`)
             .then(response => response.json())
             .then(data => {
                 setProfesional(data)
             })
+    // obtener turnos del profesional
         fetch(`${URL_API}/turnos/?id_profesional=${state.id}`)
             .then(response => response.json())
             .then(data => {
                 setTurnos(data)
             })
+    // obtener lista de clientes
         fetch(`${URL_API}/usuarios/clientes`)
             .then(response => response.json())
             .then(data => {
@@ -39,12 +42,14 @@ function Profesional({state}){
         if (turnos.length === 0) return;
         let fecha_actual = new Date();
         let turnos_hoy = [];
+        // se filtran los turnos del profesional para conservar solo los del dia actual
         for (let i = 0; i < turnos.length; i++) {
             let date = new Date(turnos[i].hora_inicio);
             if ( date.getDate() === fecha_actual.getDate() && date.getMonth() === fecha_actual.getMonth() && date.getFullYear() === fecha_actual.getFullYear()) {
                 turnos_hoy.push(turnos[i]);
             }
         }
+        // si hay algun turno para el dia de hoy, se busca y guarda el mas proximo a la hora actual
         if (turnos_hoy.length > 0) {
             let min = turnos_hoy[0];
             turnos_hoy.forEach(turno => {
