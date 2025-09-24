@@ -1,6 +1,7 @@
 import Turno from "./modules/turno"
 import "./styles/turnos.css"
 function Turnos ({turnos, clientes}){
+    console.log(clientes)
     return (
         <div id="container-turnos">
             {
