@@ -110,7 +110,7 @@ function Profesional({ state }) {
           nombre={nombre_cliente}
         />
       ) : (
-        <p>No hay más turnos para hoy</p>
+        <TurnoProximo/>
       )}
 
       <Turnos turnos={turnos_hoy} clientes={clientes} />
