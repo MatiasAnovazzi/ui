@@ -1,0 +1,38 @@
+/* Contenedor opcional para alinear label + input */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 1rem 0 2rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Label */
+.search-container label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: black;
+  font-size: 1rem;
+}
+
+/* Input */
+.search-container input {
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--300);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+  background-color: var(--50);
+  color: var(--950);
+}
+
+.search-container input::placeholder {
+  color: var(--400);
+}
+
+/* Efecto focus */
+.search-container input:focus {
+  border-color: var(--500);
+  box-shadow: 0 0 8px var(--200);
+}

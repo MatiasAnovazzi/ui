@@ -1,5 +1,35 @@
-.card-p{
-    border: 1px solid black;
-    text-align: center;
-    width: 35%;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* responsivo */
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+
+.card {
+  background: var(--100);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1rem;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid var(--300);
+  max-width: 350px;
+}
+
+.card h2 {
+  color: var(--700);
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: var(--900);
+  margin: 0.3rem 0;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background: var(--200);
 }
