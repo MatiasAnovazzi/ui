@@ -1,4 +1,4 @@
-import "../styles/card-profesionales.css"
+import "./styles/card-profesionales.css"
 
 function Card ({nombre, edad, especialidad}){
     return (

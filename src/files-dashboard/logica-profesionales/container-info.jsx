@@ -1,9 +1,9 @@
 import "./styles/container-info.css"
 
-function TurnoProximo({hora, nombre_cliente}){
+function TurnoProximo({hora, nombre}){
     return(
         <div id="container-prox" >
-            {nombre_cliente ? `Tu proximo turno es a las ${hora} con ${nombre_cliente}`: `No tienes turnos proximos`}
+            {nombre ? `Tu proximo turno es a las ${hora} con ${nombre}`: `No tienes turnos proximos`}
         </div>
     )
 }

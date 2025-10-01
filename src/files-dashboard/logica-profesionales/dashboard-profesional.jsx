@@ -101,7 +101,7 @@ function Profesional({ state }) {
             .getMinutes()
             .toString()
             .padStart(2, "0")}`}
-          nombre_cliente={nombre_cliente}
+          nombre={nombre_cliente}
         />
       ) : (
         <p>No hay más turnos para hoy</p>
