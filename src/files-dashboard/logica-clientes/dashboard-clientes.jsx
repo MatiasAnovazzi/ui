@@ -4,6 +4,7 @@ import { URL_API } from "../../files-access/access"
 import Encab from "./container-encab"
 import TurnoProximo from "../logica-profesionales/container-info"
 import "./styles/dashboard-clientes.css"
+import gif from "../load.gif"
 function Cliente({ state }) {
   const [persona, setPersona] = useState({})
   const [profesionales, setProfesionales] = useState([])
@@ -63,8 +64,14 @@ function Cliente({ state }) {
   }, [busqueda, profesionales])
 
   if (loading) {
-    return <p>Cargando...</p>
-  }
+  return (
+        <div className="loading-container">
+          <img src={gif} alt="Cargando..." className="loading-gif" />
+          <p>Cargando datos...</p>
+        </div>
+      )
+}
+
 
   return (
     <>

@@ -1,4 +1,23 @@
 /* Contenedor opcional para alinear label + input */
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; /* o 100vh para pantalla completa */
+  text-align: center;
+  color: var(--500);
+  font-family: Arial, sans-serif;
+}
+
+.loading-gif {
+  width: 100px; /* ajusta al tamaño que quieras */
+  height: 100px;
+  margin-bottom: 1rem;
+}
+
+
 .search-container {
   display: flex;
   flex-direction: column;

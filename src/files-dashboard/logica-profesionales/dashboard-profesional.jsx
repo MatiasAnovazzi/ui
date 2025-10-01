@@ -4,7 +4,7 @@ import SupContainer from "./sup-container"
 import TurnoProximo from "./container-info"
 import "./styles/dashboard-profesional.css"
 import Turnos from "./turnos"
-
+import gif from "../load.gif"
 function Profesional({ state }) {
   const [profesional, setProfesional] = useState({})
   const [turnos, setTurnos] = useState([])
@@ -85,8 +85,14 @@ function Profesional({ state }) {
 
   // 🔒 Control de carga
   if (loading) {
-    return <p>Cargando datos...</p>
-  }
+  return (
+    <div className="loading-container">
+      <img src={gif} alt="Cargando..." className="loading-gif" />
+      <p>Cargando datos...</p>
+    </div>
+  )
+}
+
 
   return (
     <div id="render-pro">
