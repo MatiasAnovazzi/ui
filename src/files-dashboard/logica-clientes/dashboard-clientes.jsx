@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Card from "./modules/card-profesionales"
 import { URL_API } from "../../files-access/access"
 import Encab from "./container-encab"
@@ -7,6 +7,8 @@ import "./styles/dashboard-clientes.css"
 import gif from "../load.gif"
 import CrearTurno from "./modules/CrearTurno"
 function Cliente({ state }) {
+    const crearTurnoRef = useRef(null)
+
     const [persona, setPersona] = useState({})
     const [profesionales, setProfesionales] = useState([])
     const [proximoTurno, setProximoTurno] = useState(null)
@@ -63,6 +65,11 @@ function Cliente({ state }) {
         )
         setFiltros(profesionalesFiltrados)
     }, [busqueda, profesionales, profesionalSeleccionado])
+    useEffect(() => {
+    if (profesionalSeleccionado && crearTurnoRef.current) {
+        crearTurnoRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+    }, [profesionalSeleccionado])
 
     if (loading) {
         return (
@@ -121,13 +128,16 @@ function Cliente({ state }) {
 
             {/* Mostrar CrearTurno solo si se seleccionó un profesional */}
             {profesionalSeleccionado && (
-                <CrearTurno
-                    idCliente={state.id}
-                    idProfesional={profesionalSeleccionado.id}
-                    nombre_profesional={profesionalSeleccionado.nombre_completo}
-                    onTurnoCreado={(nuevoTurno) => console.log("Turno creado:", nuevoTurno)}
-                />
+                <div ref={crearTurnoRef}>
+                    <CrearTurno
+                        idCliente={state.id}
+                        idProfesional={profesionalSeleccionado.id}
+                        nombre_profesional={profesionalSeleccionado.nombre_completo}
+                        onTurnoCreado={(nuevoTurno) => console.log("Turno creado:", nuevoTurno)}
+                    />
+                </div>
             )}
+
         </>
     )
 }
