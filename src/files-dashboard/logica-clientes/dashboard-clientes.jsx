@@ -21,7 +21,7 @@ function Cliente({ state }) {
         // Hacemos todos los fetch en paralelo con Promise.all
         Promise.all([
             fetch(`${URL_API}/usuarios/${state.type}/${state.id}`).then(res => res.json()),
-            fetch(`${URL_API}/usuarios/profesionales/`).then(res => res.json()),
+            fetch(`${URL_API}/usuarios/profesionales`).then(res => res.json()),
             fetch(`${URL_API}/turnos/?id_cliente=${state.id}`).then(res => res.json())
         ])
             .then(([personaData, profesionalesData, turnosData]) => {
