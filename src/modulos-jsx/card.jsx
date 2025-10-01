@@ -3,7 +3,7 @@ import '../styles/cards.css'
 
 function Card({ pic, titulo, desc}){
     return (
-        <div className='card'>
+        <div className='card-inicio'>
             <img className='img-card' src={pic} alt="" />
             <span className='info-card'>
                 <h6 className='encab-card'>{titulo}</h6>

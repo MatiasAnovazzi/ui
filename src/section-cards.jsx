@@ -6,7 +6,7 @@ import pic3 from "./img/manos.svg"
 import pic4 from "./img/refresh.svg"
 function SectionCards(){
     return (
-        <div className="cards-container">
+        <div className="cards-container-inicio">
             <Card pic={pic1} titulo={"Servicio gratuito"} desc={"Ahorra costos al no moverte de tu casa"}/>
             <Card pic={pic2} titulo={"En tiempo real"} desc={"Elegi turnos libres sin llamadas ni mensajes"} />
             <Card pic={pic3} titulo={"Conexión directa"} desc={"Agenda fácil tu turno sin intermediarios"} />
