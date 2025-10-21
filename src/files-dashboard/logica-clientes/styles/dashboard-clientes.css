@@ -17,7 +17,9 @@
   margin-bottom: 1rem;
 }
 
-
+.p{
+  margin-left: 20px;
+}
 .search-container {
   display: flex;
   flex-direction: column;

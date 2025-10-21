@@ -97,9 +97,9 @@ function Cliente({ state }) {
                 <TurnoProximo />
             )}
 
-            <h1>LISTA DE PROFESIONALES</h1>
-            <div className="search-container">
-                <label htmlFor="buscar">Buscar profesional:</label>
+            <h1 className="p">LISTA DE PROFESIONALES</h1>
+            <div className="p search-container ">
+                <label className="p" htmlFor="buscar">Buscar profesional:</label>
                 <input
                     type="text"
                     id="buscar"
