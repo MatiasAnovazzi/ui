@@ -120,6 +120,7 @@ function Formulario() {
 
                 </div>
                 <p className="p-login" >Ya tienes una cuenta? <Link to="/access" >Iniciar sesion</Link> </p>
+                <p className="p-login"><Link to="/">Volver al inicio</Link></p>
             </div>
         </>
     )
