@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 // Importar el logo para que Vite lo empaquete y proporcione la URL correcta
-import logo from './img/logo.png';
+import logo from './img/logooo.png';
 
 export default function FaviconSetter() {
   useEffect(() => {
