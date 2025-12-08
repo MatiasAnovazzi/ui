@@ -7,8 +7,7 @@ import SectionCards from './section-cards.jsx'
 function Ui() {
 
   return (
-    <>
-      <Nav />
+    <>  
       <Inicio />
       <Section />
       <Columnas/>

@@ -1,19 +1,51 @@
 import Turno from "./modules/turno"
-import "./styles/turnos.css"
-function Turnos ({turnos, clientes}){
-    console.log(clientes)
+// Borramos: import "./styles/turnos.css"
+
+// Función auxiliar para formatear hora (HH:MM)
+const formatTime = (isoString) => {
+    const date = new Date(isoString);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+};
+
+function Turnos({ turnos, clientes }) {
+    
+    if (!turnos || turnos.length === 0) {
+        return (
+            <div className="max-w-4xl mx-auto px-6 py-10 text-center text-gray-400">
+                <p>No hay turnos para mostrar en la lista.</p>
+            </div>
+        )
+    }
+
     return (
-        <div id="container-turnos">
-            {
-                turnos.map((turno, index) => <Turno
-                    key={index} 
-                    titulo={turno.titulo} 
-                    hora_inicio={`${new Date(turno.hora_inicio).getHours() <= 9 ? `0${new Date(turno.hora_inicio).getHours()}`: new Date(turno.hora_inicio).getHours()}:${new Date(turno.hora_inicio).getMinutes() <= 9 ? `0${new Date(turno.hora_inicio).getMinutes()}`: new Date(turno.hora_inicio).getMinutes()}`} 
-                    hora_fin={`${new Date(turno.hora_fin).getHours() <= 9 ? `0${new Date(turno.hora_fin).getHours()}`: new Date(turno.hora_fin).getHours()}:${new Date(turno.hora_fin).getMinutes() <= 9 ? `0${new Date(turno.hora_fin).getMinutes()}`: new Date(turno.hora_fin).getMinutes()}`} 
-                    cliente={clientes.find((cliente) => cliente.id === turno.id_cliente).nombre_completo}
-                    descripcion={turno.descripcion}/>)
-            }
+        <div className="max-w-4xl mx-auto px-6 pb-20">
+            <h3 className="text-xl font-bold text-gray-700 mb-6 flex items-center gap-2">
+                <span className="w-2 h-8 bg-ui-600 rounded-full"></span>
+                Cronograma del día
+            </h3>
+            
+            {/* Grid layout: 1 columna en móvil, 2 columnas en pantallas medianas */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {turnos.map((turno, index) => {
+                    // Buscamos el cliente de forma segura (con ?)
+                    const clienteNombre = clientes.find(c => c.id === turno.id_cliente)?.nombre_completo || "Cliente Desconocido";
+                    
+                    return (
+                        <Turno
+                            key={index}
+                            titulo={turno.titulo}
+                            hora_inicio={formatTime(turno.hora_inicio)}
+                            hora_fin={formatTime(turno.hora_fin)}
+                            cliente={clienteNombre}
+                            descripcion={turno.descripcion}
+                        />
+                    );
+                })}
+            </div>
         </div>
     )
 }
+
 export default Turnos

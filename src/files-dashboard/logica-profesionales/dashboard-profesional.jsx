@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
 import { URL_API } from "../../files-access/access"
+
+// Componentes
 import SupContainer from "./sup-container"
 import TurnoProximo from "./container-info"
-import "./styles/dashboard-profesional.css"
 import Turnos from "./turnos"
-import gif from "../load.gif"
+
+// Borramos: import "./styles/dashboard-profesional.css"
+// Borramos: import gif from "../load.gif"
+
 function Profesional({ state }) {
   const [profesional, setProfesional] = useState({})
   const [turnos, setTurnos] = useState([])
@@ -12,9 +16,13 @@ function Profesional({ state }) {
   const [nombre_cliente, setNombreCliente] = useState("")
   const [hora_proximo_turno, setHoraProximoTurno] = useState(null)
   const [turnos_hoy, setTurnosHoy] = useState([])
-  const [loading, setLoading] = useState(true) // 👈 nuevo estado
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Estilo global del body manejado via Tailwind clases en el contenedor, 
+    // pero si necesitas forzar el blanco al montar:
+    // document.body.style.backgroundColor = "#f9fafb"; // gris muy claro (gray-50)
+
     const fetchData = async () => {
       try {
         const [profRes, turnosRes, clientesRes] = await Promise.all([
@@ -35,7 +43,7 @@ function Profesional({ state }) {
       } catch (err) {
         console.error("Error cargando datos:", err)
       } finally {
-        setLoading(false) // 👈 cuando termina todo
+        setLoading(false)
       }
     }
 
@@ -83,19 +91,20 @@ function Profesional({ state }) {
     }
   }, [turnos, clientes])
 
-  // 🔒 Control de carga
+  // --- Renderizado de Carga ---
   if (loading) {
-  return (
-    <div className="loading-container">
-      <img src={gif} alt="Cargando..." className="loading-gif" />
-      <p>Cargando datos...</p>
-    </div>
-  )
-}
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 gap-4 font-sans">
+         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-ui-600"></div>
+         <p className="text-gray-500 font-medium animate-pulse">Cargando agenda...</p>
+      </div>
+    )
+  }
 
-
+  // --- Renderizado Principal ---
   return (
-    <div id="render-pro">
+    <div className="min-h-screen bg-gray-50 font-sans">
+      
       <SupContainer
         nombre={profesional.nombre_completo}
         total_turnos={turnos_hoy.length}
@@ -103,17 +112,18 @@ function Profesional({ state }) {
 
       {hora_proximo_turno ? (
         <TurnoProximo
-          hora={`${hora_proximo_turno.getHours()}:${hora_proximo_turno
+          hora={`${hora_proximo_turno.getHours().toString().padStart(2, '0')}:${hora_proximo_turno
             .getMinutes()
             .toString()
             .padStart(2, "0")}`}
           nombre={nombre_cliente}
         />
       ) : (
-        <TurnoProximo/>
+        <TurnoProximo />
       )}
 
       <Turnos turnos={turnos_hoy} clientes={clientes} />
+      
     </div>
   )
 }
